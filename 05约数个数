@@ -1,0 +1,32 @@
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+const int MOD = 1e9 + 7;
+typedef long long LL;
+int main()
+{
+    unordered_map<int ,int > primes;
+    int m;
+    cin >> m;
+    while(m --)
+    {
+        int x;
+        cin >> x;
+        for(int i = 2;i <= x / i; i ++)
+        {
+            //这里是易错点，while循环判断质因子的数量，然后在哈希表中对应相加
+            while(x % i == 0)
+            {
+                x /= i;
+                primes[i] ++;
+            }
+        }
+        if(x > 1)primes[x] ++ ;
+    }
+        LL ret = 1;
+        for(auto p : primes) ret = ret * (p.second + 1) % MOD;
+        cout << ret << endl;
+    return 0;
+}
