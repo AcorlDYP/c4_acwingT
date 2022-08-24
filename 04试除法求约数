@@ -1,0 +1,39 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+
+vector<int> get_divisor(int n)
+{
+    vector<int> divisor;
+    for(int i = 1;i <= n / i; i ++)
+    {
+        if(n % i == 0)
+        {
+            divisor.push_back(i);
+        //如果i和n/i相等就不需要再放入容器中
+        if(i != n / i)divisor.push_back(n / i);
+        }
+    }
+    //排序
+    sort(divisor.begin(),divisor.end());
+    return divisor;
+}
+
+int main()
+{
+    int m;
+    cin >> m;
+    while(m --)
+    {
+        int n;
+        cin >> n;
+        auto res = get_divisor(n);
+        for(auto t : res)cout << t << " ";
+        cout << endl;
+    }
+    return 0;
+}
+
